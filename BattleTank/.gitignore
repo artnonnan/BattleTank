@@ -1,6 +1,6 @@
 Content/StarterContent/*
 *.VC.db
-
+*.ipch
 # Visual Studio 2015 user specific files
 .vs/
 
