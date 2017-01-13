@@ -31,8 +31,8 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed) {
 		HitLocation,
 		LaunchSpeed,
 		false,
-		0.f,
-		0.f,
+		0,
+		0,
 		ESuggestProjVelocityTraceOption::DoNotTrace
 	);
 
@@ -43,6 +43,12 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed) {
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
 		
 		MoveBarrelToward(AimDirection);
+		auto Time = GetWorld()->GetTimeSeconds();
+		
+	}
+	else {
+		//auto Time = GetWorld()->GetTimeSeconds();
+		//UE_LOG(LogTemp, Warning, TEXT("%f : not"), Time);
 	}
 }
 
@@ -52,10 +58,17 @@ void UTankAimingComponent::MoveBarrelToward(FVector AimDirection) {
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
 
 	
-
-	Barrel->Elevate(5);
+	UE_LOG(LogTemp, Warning, TEXT("Pitch : %f "), DeltaRotator.Pitch);
+		Barrel->Elevate(DeltaRotator.Pitch);
+	//Barrel->Elevate(5);
 }
 
 void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet) {
+	if (!BarrelToSet) { return; }
 	Barrel = BarrelToSet;
  }
+
+void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet) {
+	if (!TurretToSet) { return; }
+	Turret = TurretToSet;
+}
