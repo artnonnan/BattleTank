@@ -5,6 +5,7 @@
 
 // Forward declarations
 class UTankBarrel;
+class UTankTrack;
 class UTankAimingComponent;
 class AProjectile;
 
@@ -19,6 +20,12 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret* TurretToSet);
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetLeftTrackReference(UTankTrack* LeftTrackToSet);
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetRightTrackReference(UTankTrack* RIghtTrackToSet);
 
 	void AimAt(FVector HitLocation);
 
@@ -41,15 +48,19 @@ private:
 	// Sets default values for this pawn's properties
 	ATank();
 
-	UPROPERTY(EditAnywhere, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	float ReloadTimeInSeconds = 3;
+
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float LaunchSpeed = 4000;
 
-	UPROPERTY(EditAnywhere, Category = Setup)
-		TSubclassOf<AProjectile> ProjectileBlueprint;
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	TSubclassOf<AProjectile> ProjectileBlueprint;
 
 	// Local barrel reference for spawning projectile
 	UTankBarrel* Barrel = nullptr;
 
-	float ReloadTimeInSeconds = 3;
+	
+
 	double LastFireTime = 0;
 };
