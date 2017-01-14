@@ -18,7 +18,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Input)
 	void SetThrottle(float Throttle);
 
-private: 
-
+	UPROPERTY(EditDefaultsOnly)
+		float TrackMaxDivingForce = 40000; // Assume 40 tonne tank, and 1g acceleration
 	
 };
