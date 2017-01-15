@@ -2,10 +2,10 @@
 
 #pragma once
 
+#include "TankTrack.h"
 #include "GameFramework/NavMovementComponent.h"
 #include "TankMovementComponent.generated.h"
 
-class UTankTrack;
 
 /**
  * Responsible for driving
